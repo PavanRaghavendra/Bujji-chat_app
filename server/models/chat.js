@@ -22,7 +22,13 @@ const Chatschema=new mongoose.Schema(
             type:Types.ObjectId,
             ref:"User"
         },
-    ],
+        ],
+        admin:[
+            {
+                type:Types.ObjectId,
+                ref:"User"
+            },
+            ],
     },
     {
         timestamps:true

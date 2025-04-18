@@ -2,7 +2,10 @@ import { Types } from "mongoose";
 import mongoose from "mongoose";
 const MessageSchema=new mongoose.Schema(
     {
-        constent: String,
+        content:{
+            type:String,
+            require:true
+        },
         attachments:
         [{
             public_id:
@@ -20,7 +23,7 @@ const MessageSchema=new mongoose.Schema(
         sender:
         {
             type:Types.ObjectId,
-            ref:"user",
+            ref:"User",
             required:true,
         },
         chatId:

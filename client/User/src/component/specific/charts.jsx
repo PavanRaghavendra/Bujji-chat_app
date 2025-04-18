@@ -55,22 +55,15 @@ const lineChartOptions={
     }
 };
 const getlabel=getLast7Days();
-const Charts = ({value=[]}) => {
+const Charts = ({value}) => {
     const data={
         labels:getlabel,
         datasets:[{
             data:value,
-            lable:"Revenue",
+            label:"Messages",
             fill:true,
             backgroundColor:"rgba(75,192,192,0.2)",
             borderColor:"rgba(75,192,192,1)"
-        },
-        {
-            data:[5,8,5,3,20,16],
-            lable:"Revenue2",
-            fill:true,
-            backgroundColor:"rgba(175,12,192,0.3)",
-            borderColor:"rgba(175,12,192,1)"
         }
     ]
     };
@@ -93,7 +86,7 @@ const doughnutChartOptions={
         },
     },
 };
-const PillaMessage=({value=[],labels=[]})=>
+const PillaMessage=({value,labels})=>
     {
         const data={
             labels,

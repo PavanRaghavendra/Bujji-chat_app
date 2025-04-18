@@ -18,9 +18,15 @@ const UserSchema=new mongoose.Schema(
             required:true,
             select:false
         },
+        bio: {
+            type: String,
+            required: false, // Make it not required to be compatible with existing data
+            default: "" // Provide a default value for existing records
+        }
     },
     {
         timestamps:true
     },
 );
-export const User=mongoose.model("User",UserSchema);
+const User=mongoose.model("User",UserSchema);
+export{User};

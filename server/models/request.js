@@ -1,4 +1,4 @@
-import mongoose, {Types, Schema ,Schema} from "mongoose";
+import mongoose, {Types,Schema} from "mongoose";
 const RequestSchema=new mongoose.Schema(
     {
     status:
@@ -12,24 +12,24 @@ const RequestSchema=new mongoose.Schema(
         public_id:
         {
             type:String,
-            required:true,
+           // required:true,
         },
         url:
         {
             type:String,
-            required:true
+            //required:true
         }
     },
     sender:
     {
         type:Types.ObjectId,
-        ref:"user",
+        ref:"User",
         required:true,
     },
     recevier:
     {
         type:Types.ObjectId,
-        ref:"user",
+        ref:"User",
         required:true,
 
     },

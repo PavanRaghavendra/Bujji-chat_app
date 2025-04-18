@@ -27,5 +27,11 @@ const getLast7Days=()=>
             }
             return last7Days;
     };
-
-export {fileFormat,getLast7Days}
+    const getNotificationSave=({key,value,get})=>
+    {
+        if(get)
+           return localStorage.getItem(key)?JSON.parse(localStorage.getItem(key)):null
+        else
+            localStorage.setItem(key,JSON.stringify(value))
+    }
+export {fileFormat,getLast7Days,getNotificationSave}

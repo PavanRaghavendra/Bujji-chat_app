@@ -3,18 +3,24 @@ import { memo } from 'react';
 import moment from 'moment'
 import { fileFormat } from '../../lib/features';
 import RenderAttach from './RenderAttach';
-const MessageComponent = ({message,User}) => {
+import { useSelector } from 'react-redux';
+import {motion} from 'framer-motion'
+const MessageComponent = ({message}) => {
+  const user=useSelector(state=>state.auth.user);
   const {sender,content,attachments=[],createdAt}=message;
-  const samesender= sender._id===User._id;
+  const samesender= sender._id.toString() ===  user._id.toString();
   const timeAgo=moment(createdAt).fromNow();
   return ( 
     <>
-    <div className='text-black flex flex-col'>
+    <motion.div
+      initial={{opacity:0,x:"-100%"}}
+      whileInView={{opacity:1,x:0}}
+     className='text-black flex flex-col'>
     {
       samesender?(
         <div className='flex justify-end m-3'>
           <div className='flex flex-col bg-white border-r-2 p-2 rounded-md'>
-          <p className='text-blue-600 text-lg'>{sender.name}</p>
+          <p className='text-blue-600 text-lg'>You</p>
           {content&&<p>{content}</p>}
           {
             attachments.length>0?(
@@ -24,15 +30,14 @@ const MessageComponent = ({message,User}) => {
                 const file=fileFormat(url);
                 return <>
                 <div>
-                  <a href='' target='_blank'>
+                  <a href={url} target="_self">
                     {RenderAttach(file,url)}
                   </a>
                 </div>
                 </>
               })
             ):(
-              <div>
-              </div>
+              <span></span>
             )
           }
           <p className='text-xs items-start'>{timeAgo}</p>
@@ -58,9 +63,7 @@ const MessageComponent = ({message,User}) => {
                 </>
               })
             ):(
-              <div>
-                <p>NO</p>
-              </div>
+              <span></span>
             )
           }
           <p className='text-xs items-start'>{timeAgo}</p>
@@ -68,7 +71,7 @@ const MessageComponent = ({message,User}) => {
         </div>
       )
     }
-    </div>
+    </motion.div>
     </>
   )
 }

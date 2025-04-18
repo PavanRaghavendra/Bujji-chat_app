@@ -3,39 +3,33 @@ import ChatItem from "../shared/ChatItem";
 import { samplechats } from "../../assets/constants/sampleData";
 const ChatList=(
     {
-        chats=[],
+        chats,
         chatId,
         onlineUsers=[],
-        newMessagesAlret=[
-            {
-                chatId:"",
-                count:0,
-            },
-        ],
+        newMessagesAlert,
         handleDeleteChat,
     }
 )=>
     {
         return <>
-        <div className="flex flex-col overflow-auto h-full">
+        <div className="flex flex-col overflow-auto h-screen">
             {
-                chats?.map((data,index)=>
+                chats?.map(({_id,name,groupChat,Members,index})=>
                 {
-                    const {_id,name,groupchat,members}=data;
-                    const newMessageAlret=newMessagesAlret.find(
+                    const newMessageAlert=newMessagesAlert.find(
                         ({chatId})=>chatId ==_id
                     );
                     //console.log(newMessageAlret);
-                    const isonline=members.some((members) => onlineUsers.includes(members));
+                    const isonline=Members.some((members) => onlineUsers.includes(members));
                     return <ChatItem 
-                    index={index}
-                    newMessageAlret={newMessageAlret}
+                    newMessageAlert={newMessageAlert}
                     isOnline={isonline}
                     name={name}
                     _id={_id}
                     key={_id}
-                    groupChat={groupchat}
-                    samesender={chatId=== _id}
+                    index={index}
+                    groupChat={groupChat}
+                    samesender={chatId === _id}
                     handleDeleteChatopen={handleDeleteChat}/>
                 })
             }

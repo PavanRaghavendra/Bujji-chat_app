@@ -12,4 +12,38 @@ const Loader=()=>
             </>
         )
     };
+const ChatLoader=()=>
+{
+    return(<>
+    <div className="grid grid-flow-col h-full">
+        <div className="w-full h-12 bg-slate-400 shadow-xl"></div>
+        <div className="w-full h-12 bg-slate-400 shadow-xl"></div>
+        <div className="w-full h-12 bg-slate-400 shadow-xl"></div>
+        <div className="w-full h-12 bg-slate-400 shadow-xl"></div>
+        <div className="w-full h-12 bg-slate-400 shadow-xl"></div>
+        <div className="w-full h-12 bg-slate-400 shadow-xl"></div>
+        <div className="w-full h-12 bg-slate-400 shadow-xl"></div>
+        <div className="w-full h-12 bg-slate-400 shadow-xl"></div>
+        <div className="w-full h-12 bg-slate-400 shadow-xl"></div>
+        <div className="w-full h-12 bg-slate-400 shadow-xl"></div>
+    </div>
+    </>)
+}
+const TypingLoader=()=>
+{
+    return (
+        <div className="flex items-center text-gray-500 text-sm p-2">
+          <div className="mr-2 animate-pulse" style={{animationDelay:'0ms'}}>typing</div>
+          <div className="flex space-x-1">
+            <div className="w-2 h-2 bg-blue-600 rounded-full animate-bounce" 
+                 style={{ animationDelay: '0ms' }}></div>
+            <div className="w-2 h-2 bg-blue-600 rounded-full animate-bounce" 
+                 style={{ animationDelay: '150ms' }}></div>
+            <div className="w-2 h-2 bg-blue-600 rounded-full animate-bounce" 
+                 style={{ animationDelay: '300ms' }}></div>
+          </div>
+        </div>
+      );
+}
+export {Loader,ChatLoader,TypingLoader};
 export default Loader;

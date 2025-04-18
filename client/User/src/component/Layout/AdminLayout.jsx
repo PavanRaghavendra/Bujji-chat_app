@@ -1,8 +1,11 @@
 import React, { Children, useState } from 'react'
-import { useLocation,Link, Navigate } from 'react-router-dom';
-
+import { useLocation,Link, Navigate, useNavigate } from 'react-router-dom';
+import {useDispatch,useSelector} from 'react-redux'
+import { logoutAdmin } from '../../redux/reducers/thunk/admin';
 const AdminLayout = ({children}) => {
   const [isMobile,setIsMobile]=useState(false);
+  const navigate=useNavigate()
+  const dispatch=useDispatch()
   const adminTabs=[
     {
     name:"Dashboard",
@@ -11,42 +14,42 @@ const AdminLayout = ({children}) => {
 },
 {
   name:"Chats",
-  path:"/admin/chats",
-  icon:"icon"
+  path:"/admin/chats"
 },
 {
   name:"messages",
-  path:"/admin/messages",
-  icon:"icon"
+  path:"/admin/messages"
 },
 {
   name:"users",
-  path:"/admin/users",
-  icon:"icon"
+  path:"/admin/users"
 },
 ]
 const logouthandler=()=>
   {
-
+    console.log("logout")
+    dispatch(logoutAdmin())
+    navigate("/admin")
   };
   const handleMobile=()=>
     {
       setIsMobile(!isMobile);
     };
     const location=useLocation();
-    const IsAdmin=true;
+    const IsAdmin=useSelector(state=>state.auth.isAdmin);
    if(!IsAdmin)
-    return <Navigate to={"/admin"}/>
+   {
+      navigate("/admin")
+   }
   return (
    <div className='min-h-screen flex relative'>
-    <div className='hidden shadow-2xl sm:block sm:w-1/4 bg-slate-200'>
+    <div className='hidden shadow-2xl sm:block sm:w-1/4 text-xl cursor-pointer bg-slate-200'>
     {
         adminTabs.map((tab)=>
         (
          location.pathname===tab.path?(
             <Link to={tab.path} key={tab.path}>
-              <div className=' bg-black rounded-lg text-white border-2 w-fit m-2 p-1 flex gap-2 justify-center mx-auto'>
-                <p>{tab.icon}</p>
+              <div className=' bg-black rounded-lg text-white border-2 w-fit m-2 p-1 flex items-center gap-2 mx-auto'>
                 <p>{tab.name}</p>
               </div>
             </Link>
@@ -54,7 +57,6 @@ const logouthandler=()=>
          (
           <Link to={tab.path} key={tab.path}>
               <div className=' w-fit m-2 p-1 flex gap-2 justify-center mx-auto hover:border-2 hover:rounded-lg'>
-                <p>{tab.icon}</p>
                 <p>{tab.name}</p>
               </div>
             </Link>
@@ -63,7 +65,6 @@ const logouthandler=()=>
       }
           <Link onClick={logouthandler}>
             <div className=' w-fit m-2 p-1 flex gap-2 justify-center mx-auto'>
-                <p>Icon</p>
                 <p>Logout</p>
               </div>
           </Link>

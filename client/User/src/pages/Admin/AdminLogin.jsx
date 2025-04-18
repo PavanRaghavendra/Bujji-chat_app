@@ -1,15 +1,26 @@
 import { useInputValidation } from "6pp";
-import React, { useState } from "react";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Navigate } from "react-router-dom";
-const isAdmin=false;
+import { adminValidation, getAdmin } from "../../redux/reducers/thunk/admin";
 const AdminLogin = () => {
+    const dispatch=useDispatch()
+    const isAdmin=useSelector(state=>state.auth.isAdmin)
     const secretkey=useInputValidation("")
     const submitHanlder=(e)=>
         {
             e.preventDefault();
-            console.log("submit");
+            dispatch(adminValidation(secretkey.value))
         };
-        if (isAdmin) return <Navigate to="/admin/dashboard"/>
+        useEffect(()=>
+        {
+            console.log("into get admin")
+            dispatch(getAdmin())
+        },[dispatch])
+        useEffect(()=>{
+            if (isAdmin) 
+                return <Navigate to="/admin/dashboard"/>
+        },[])
     return(
         <>
         <div class="outline" className=" flex justify-center items-center h-screen bg-gradient-to-b from-indigo-500 to-purple-500">

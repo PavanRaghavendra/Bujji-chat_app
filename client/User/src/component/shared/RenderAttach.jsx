@@ -9,8 +9,14 @@ const RenderAttach = (file,url) => {
        return <img src={url} alt='attachments' width={200} height={150}/>
     case "audio":
        return <audio src={url} preload='none' controls/>
+    case "file":
+      return (
+        <a href={url} target='_blank' rel="noopener noreferrer">
+          Download File
+        </a>
+      )
     default:
-       return <p>NO file</p>
+      return <p>No file available</p>
   }
 }
 

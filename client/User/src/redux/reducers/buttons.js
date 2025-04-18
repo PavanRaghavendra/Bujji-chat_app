@@ -1,0 +1,85 @@
+import { createSlice } from "@reduxjs/toolkit";
+
+const initialState={
+    search:false,
+    notification:false,
+    newgroup:false,
+    ismobile:false,
+    File:false,
+    sendFile:false,
+    setLoading:false,
+    IsaddMember:false,
+    deletegroup:false,
+    Isdeletechat:false,
+    selectChatId:{
+        chatId:"",
+        groupChat:false
+    },
+    Ismakeadmin:false,
+    selectUserId:{
+        userId:"",
+        chatId:""
+    }
+}
+const buttonSilce=createSlice({
+    name:'buttons',
+    initialState,
+    reducers:{
+        useSearch(state,action)
+        {
+            state.search=action.payload
+        },
+        useNotification(state,action)
+        {
+            state.notification=action.payload
+        },
+        useGroup(state,action)
+        {
+            state.newgroup=action.payload
+        },
+        useMobile(state,action)
+        {
+            state.ismobile=action.payload
+        },
+        useFileOption(state,action)
+        {
+            state.File=action.payload
+        },
+        usesendFileON(state,action)
+        {
+            state.sendFile=action.payload
+        },
+        usesetLoading(state,action)
+        {
+            state.setLoading=action.payload;
+        },
+        useAddmember(state,action)
+        {
+            state.IsaddMember=action.payload;
+        },
+        useDeletegroup(state,action)
+        {
+            state.deletegroup=action.payload
+        },
+        useDeletechat(state,action)
+        {
+            state.Isdeletechat=action.payload
+        },
+        setchatId(state,action)
+        {
+            state.selectChatId=action.payload
+        },
+        setIsadmin(state,action)
+        {
+            state.Ismakeadmin=action.payload
+        },
+        setUserId(state,action)
+        {
+            state.selectUserId=action.payload
+        }
+    }
+});
+export default buttonSilce;
+export const {usesetLoading,usesendFileON,useGroup,useNotification,useSearch,useMobile,useFileOption,useAddmember,
+    useDeletegroup,useDeletechat,setchatId,setIsadmin,setUserId
+}=buttonSilce.actions;
